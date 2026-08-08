@@ -11,12 +11,13 @@ class Solution {
         }
          n=size-n;
          if(n==0) return head.next;
-         
-          ListNode prev=head;
-         for (int i = 0; i < n - 1; i++) {
-            prev = prev.next;
+
+          ListNode prev=null,dh=head;
+         for (int i = 0; i < n ; i++) {
+            prev=dh;
+            dh = dh.next;
         }
-          prev.next= prev.next.next;
+          prev.next= dh.next;
 
           return head;
 
