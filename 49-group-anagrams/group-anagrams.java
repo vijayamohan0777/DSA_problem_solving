@@ -14,11 +14,11 @@ class Solution {
             mp.get(key).add(x);
            }
        }
-       List<List<String>>ans =new ArrayList<>();
-       for(String x :mp.keySet()){
-        ans.add(mp.get(x));
-       }
+    //    List<List<String>>ans =new ArrayList<>();
+    //    for(String x :mp.keySet()){
+    //     ans.add(mp.get(x));
+    //    }
 
-       return ans;
+       return new ArrayList<>(mp.values());
     }
 }
