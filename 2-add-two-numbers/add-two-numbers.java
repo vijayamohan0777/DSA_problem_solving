@@ -3,6 +3,7 @@ class Solution {
         
       int carry=0;
       ListNode head=null;
+       ListNode temp=null;
 
       while(l1!=null || l2!=null|| carry!=0){
           int sum=carry;
@@ -20,20 +21,25 @@ class Solution {
           carry=sum/10;
 
           ListNode nn =new ListNode(value);
-           nn.next=head;
+           if(head==null){
             head=nn;
+            temp=head;
+           }else{
+           temp.next=nn;
+           temp=nn;
+           }  
 
       }
 
-      ListNode rh=null;
-      ListNode temp=head;
+    //   ListNode rh=null;
+    //   ListNode temp=head;
 
-      while(temp!=null){
-        temp=temp.next;
-        head.next=rh;
-        rh=head;
-        head=temp;
-      }
-        return rh;
+    //   while(temp!=null){
+    //     temp=temp.next;
+    //     head.next=rh;
+    //     rh=head;
+    //     head=temp;
+    //   }
+        return head;
     }
 }
