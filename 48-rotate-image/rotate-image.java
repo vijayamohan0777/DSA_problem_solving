@@ -8,7 +8,7 @@ class Solution {
         // if i can use extra space like temp[][]
         // temp[i][j]  = matrix[j][i];
         for (int i = 0; i < n; i++) {
-            for (int j = i+1; j < n; j++) {
+            for (int j = i+1; j < n; j++) {  //j=i+1   is important for upper diagnol transpose
                 int temp = matrix[i][j];
                 matrix[i][j] = matrix[j][i];
                 matrix[j][i] = temp;
