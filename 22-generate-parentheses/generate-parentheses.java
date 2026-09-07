@@ -1,31 +1,25 @@
 class Solution {
+    void solve(int n,List<String> ans,String current,int open,int close){
+            if(current.length() == 2*n){
+                ans.add(current);
+                return;
+            }
+         
+          if(open<n){
+            solve(n,ans,current+"(",open+1,close);
+          }
 
-    void solve(int n, int open, int close, String currentbrackets, ArrayList<String> ans) {
-        if (currentbrackets.length() == 2 * n) { // if n=2 , 2*2 == 4 == "(())"
-            ans.add(currentbrackets);
-            return;
-        }
+          if(close<open){
+            solve(n,ans,current+")",open,close+1);
+          }
 
-        if (open < n) { // important backtrack
-            solve(n, open + 1, close, currentbrackets + "(", ans);
-        }
-
-        if (open > close) { // important backtrack
-            solve(n, open, close + 1, currentbrackets + ")", ans);
-        }
     }
-
     public List<String> generateParenthesis(int n) {
-        ArrayList<String> ans = new ArrayList<>();
-
-        String currentbrackets = "";
-
-        int open = 0;
-        int close = 0;
-
-        solve(n, open, close, currentbrackets, ans);
-        //solve(n,0,0,"",ans);
-
+        List<String>ans=new ArrayList<>();
+        String current="";
+        int open=0,close=0;
+        solve(n, ans,current,open,close);
+        
         return ans;
     }
 }
