@@ -5,22 +5,22 @@ class Solution {
         if (sum > target) {
             return;
         }
+
         if (sum == target) {
-            ans.add(new ArrayList<Integer>(temp)); //syntax
+            ans.add(new ArrayList<>(temp));
             return;
         }
         if (i == n) {
             return;
         }
 
-        if (sum + candidates[i] <= target) { //not check current sum ,check sum with add current element
+        if (sum + candidates[i] <= target) {
+            //take as reuse
             temp.add(candidates[i]);
-            // for reuse
             solve(i, n, sum + candidates[i], temp, ans, target, candidates);
 
-            temp.remove(temp.size() - 1); // for backtrack important*** remove last recursive element
-
-            //skip
+            //take as skip
+            temp.remove(temp.size() - 1);
             solve(i + 1, n, sum, temp, ans, target, candidates);
         } else {
             solve(i + 1, n, sum, temp, ans, target, candidates);
@@ -29,12 +29,12 @@ class Solution {
     }
 
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        List<List<Integer>> ans = new ArrayList<>();
-
-        int sum = 0;
         int n = candidates.length;
+        int sum = 0;
         int i = 0;
         List<Integer> temp = new ArrayList<>();
+        List<List<Integer>> ans = new ArrayList<>();
+
         solve(i, n, sum, temp, ans, target, candidates);
 
         return ans;
