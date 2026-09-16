@@ -14,34 +14,30 @@
  * }
  */
 class Solution {
+    int preindex=0;
 
-    int preindex = 0;
-
-    TreeNode build(int[] preorder, int[] inorder, int left, int right) {
-        // there is no element in left in inoreder return null
-
-        if (left > right) {
+     TreeNode build(int[] preorder, int[] inorder,int left,int right){
+        if(left>right){
             return null;
         }
 
-        int rootvalue = preorder[preindex++];
+        int index=left;
+        int rootvalue=preorder[preindex++];
+        TreeNode root=new TreeNode(rootvalue);
 
-        TreeNode root = new TreeNode(rootvalue);
-
-        int index = left;
-        while (inorder[index] != rootvalue) {
+        while(inorder[index] != rootvalue){
             index++;
         }
 
-        root.left = build(preorder, inorder, left, index - 1);
-        root.right = build(preorder, inorder, index + 1, right);
+        root.left=build(preorder,inorder,left,index-1);
+        root.right=build(preorder,inorder,index+1,right);
 
         return root;
-    }
-
+     }
     public TreeNode buildTree(int[] preorder, int[] inorder) {
-        int left = 0;
-        int right = inorder.length - 1;
-        return build(preorder, inorder, left, right);
+           int left=0;
+           int right=inorder.length-1;
+           
+           return build(preorder,inorder,left,right);
     }
 }
