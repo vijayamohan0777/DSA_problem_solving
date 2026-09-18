@@ -26,6 +26,8 @@ class Solution {
     public int kthSmallest(TreeNode root, int k) {
        // PriorityQueue<Integer> min=new PriorityQueue<>(); 
          ArrayList<Integer> list=new ArrayList<>();
+
+         //inorder is always in sorting order;
            inorder( root ,list);
               
             //   for(int i=0;i<k-1;i++){
