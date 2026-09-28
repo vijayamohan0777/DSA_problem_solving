@@ -1,52 +1,50 @@
 class Solution {
-    public int orangesRotting(int[][] grid) {
-        Queue<int[]> q = new LinkedList<>();
-        int fresh = 0;
-        int n = grid.length;
-        int m = grid[0].length;
+    int fresh=0;
+    int minutes=0;
 
-        int[][] directions = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                if (grid[i][j] == 2) {
-                    q.offer(new int[] { i, j });
+    void bfs(int[][] grid,int[][] directions, Queue<int[]> q){
+        while(! q.isEmpty() && fresh>0){
+            int size=q.size();
+            minutes++;
+            int i=0;
+            while(i++ < size){
+                int[] temp=q.poll();
+                int x=temp[0];
+                int y=temp[1];
+                for(int j=0;j<directions.length;j++){
+                    int nx=x+directions[j][0];
+                    int ny=y+directions[j][1];
+
+                    if(nx<0 || ny<0 || nx >=grid.length || ny >=grid[0].length || grid[nx][ny]==0){
+                       continue;
+                    }
+
+                    if(grid[nx][ny]==1){
+                        fresh--;
+                        grid[nx][ny]=2;
+                       q.offer(new int[]{nx,ny});
+                    }
                 }
-                if (grid[i][j] == 1) {
+            }
+        }
+    }
+    public int orangesRotting(int[][] grid) {
+        Queue<int[]> q=new LinkedList<>();
+        int[][] directions={{0,1},{0,-1},{1,0},{-1,0}};
+
+        for(int i=0;i<grid.length;i++){
+            for(int j=0;j<grid[0].length;j++){
+                if(grid[i][j]==2){
+                    q.offer(new int[]{i,j});
+                }
+                if(grid[i][j]==1){
                     fresh++;
                 }
             }
         }
 
-        int minute = 0;
-        while (!q.isEmpty() && fresh > 0) {
-            minute++;
+        bfs(grid,directions,q);
 
-            int size = q.size();
-            int i = 0;
-            while (i++ < size) {
-                int[] p = q.poll();
-
-                int x = p[0];
-                int y = p[1];
-
-                for (int k = 0; k < directions.length; k++) {
-                    int rx = x + directions[k][0];
-                    int ry = y + directions[k][1];
-
-                    if (rx < 0 || rx >= n || ry < 0 || ry >= m || grid[rx][ry] == 0) {
-                        continue;
-                    }
-
-                    if (grid[rx][ry] == 1) {
-                        grid[rx][ry] = 2;
-                        fresh--;
-                        q.offer(new int[] { rx, ry });
-                    }
-                }
-
-            }
-
-        }
-        return fresh == 0 ? minute : -1;
+        return fresh==0 ? minutes:-1;
     }
 }
