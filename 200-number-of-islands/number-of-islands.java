@@ -1,10 +1,8 @@
 class Solution {
     int islands = 0;
-
-    void bfs(char[][] grid, int[][] directions, Queue<int[]> q) {
-              
-        while (!q.isEmpty()) {
-              
+    void bfs(char[][] grid, int[][] directions, Queue<int[]> q) {     
+            
+        while (!q.isEmpty()) {      
             int[] t = q.poll();
             int x = t[0];
             int y = t[1];
@@ -18,7 +16,7 @@ class Solution {
                     continue;
                 }
 
-                if (grid[nx][ny] == '1') {
+               if (grid[nx][ny] == '1') {
                     q.offer(new int[] { nx, ny });
                     grid[nx][ny] = '0';
                 }
@@ -26,7 +24,6 @@ class Solution {
         }
         return;
     }
-
     public int numIslands(char[][] grid) {
         int n = grid.length;
         int m = grid[0].length;
